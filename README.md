@@ -30,6 +30,9 @@
 ## 运行及结果
 
 ### 运行命令
+
+Linux：
+
 ```bash
 # 确认g++ 和cmake 版本
 sh build_and_run.sh
@@ -38,8 +41,20 @@ sh build_and_run.sh
 cmake . && make
 ```
 
+Windows：
+
+Windows 系统运行 cmake 需要带参数 `-G "MinGW Makefiles"` 否则生成出来是 VS 工程。
+
+```bat
+build_and_run.bat
+
+rem 或
+
+cmake . -G "MinGW Makefiles" && make
+```
+
 ### 结果
-如果不修改代码的话，结果保存在 output_pcm内。
+如果不修改代码的话，结果保存在 output_pcm 内。
 文件名如下
 ```
 16k_1.pcm_0-12989_A.pcm         // 第0-12989毫秒的音频， 
@@ -87,12 +102,3 @@ demo因为考虑到流式，采用了尽快切割的方法。如果您对这个�
 // 表示 [5150, 5220) 等区间内是有声音的，其它区间均为静音，
 // 如果需要切割的话，应该在静音区间选择合适的位置切割
 ```
-
-
-
-
-
-
-
-
-
