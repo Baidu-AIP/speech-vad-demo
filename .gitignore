@@ -2,3 +2,4 @@ pcm/
 build/
 output_pcm/
 .vscode/
+vad-demo*
