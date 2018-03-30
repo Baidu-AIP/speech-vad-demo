@@ -43,7 +43,7 @@ cmake . && make
 
 Windows：
 
-Windows 系统运行 cmake 需要带参数 `-G "MinGW Makefiles"` 否则生成出来是 VS 工程。
+Windows 系统运行 cmake 需要带参数 `-G "MinGW Makefiles"` 否则生成出来是 VS 工程。报错请先检查工程路径是否存在中文字符。
 
 ```bat
 build_and_run.bat
