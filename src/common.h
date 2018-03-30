@@ -35,7 +35,7 @@
 
 #define FRAME_SIZE (160 * MULTI)
 
-uint64_t inline cal_time_by_frame(int frame);
+uint64_t cal_time_by_frame(int frame);
 
-int inline cal_frame_by_time(uint64_t time);
+int cal_frame_by_time(uint64_t time);
 #endif //VAD_DEMO_COMMON_H
