@@ -7,5 +7,6 @@ cd build
 cmake .. -G "MinGW Makefiles"		&& ^
 make -j4							&& ^
 copy vad-demo.exe ..				&& ^
-cd ..								&& ^
-.\vad-demo.exe
+..\vad-demo.exe
+
+cd ..
