@@ -35,15 +35,15 @@ static inline int cut_write_file(struct cut_info *cut, int frames) {
 
 static inline int cut_frame(struct cut_info *cut, int last_frame, int force) {
     int frames = last_frame - cut->cut_begin_frame;
-    if (force || (frames >= cal_frame_by_time(FILE_CUT_MIN_MS))) {
+    if (force || (frames >= CAL_FRAME_BY_TIME(FILE_CUT_MIN_MS))) {
         if (last_frame == 109) {
             printf("%d", 109);
         }
         //printf("cut file at frame: %d\n", last_frame);
         snprintf(cut->result_filename, sizeof(cut->result_filename),
                  "%s/%s_%ld-%ld_%s.pcm", cut->output_file_dir,
-                 cut->output_filename_prefix, cal_time_by_frame(cut->cut_begin_frame),
-                 cal_time_by_frame(last_frame) - 1, cut->is_contain_active ? "A" : "I");
+                 cut->output_filename_prefix, CAL_FRAME_BY_FRAME(cut->cut_begin_frame),
+                 CAL_FRAME_BY_FRAME(last_frame) - 1, cut->is_contain_active ? "A" : "I");
         cut_write_file(cut, frames);
         cut->is_pervious_active = 0;
         cut->is_contain_active = 0;
@@ -57,7 +57,7 @@ static inline int cut_frame(struct cut_info *cut, int last_frame, int force) {
 static inline int add_continued(struct cut_info *cut, int is_active) {
     if (!is_active && cut->is_contain_active) {
         // 有响声，之后连续静音
-        int diff = cut->previous_along_frames - cal_frame_by_time(FILE_CUT_SILENCE_AFTER_ACTIVE_MS);
+        int diff = cut->previous_along_frames - CAL_FRAME_BY_TIME(FILE_CUT_SILENCE_AFTER_ACTIVE_MS);
         if (diff >= 0) {
             int res = cut_frame(cut, cut->current_frame, 0);
             if (res == 0) {
@@ -76,9 +76,9 @@ static inline int add_changed(struct cut_info *cut, int is_active) {
     int frame = 0;
     if (is_active) {
         // 连续静音，之后遇到响声
-        if (cut->previous_along_frames > cal_frame_by_time(FILE_CUT_SILENCE_BEFORE_ACTIVE_MS)) {
+        if (cut->previous_along_frames > CAL_FRAME_BY_TIME(FILE_CUT_SILENCE_BEFORE_ACTIVE_MS)) {
             int c_frames =
-                    cut->current_frame - cal_frame_by_time(FILE_CUT_SILENCE_BEFORE_ACTIVE_MS);
+                    cut->current_frame - CAL_FRAME_BY_TIME(FILE_CUT_SILENCE_BEFORE_ACTIVE_MS);
             int res = cut_frame(cut, c_frames, 0);
             if (res == 0) {
                 frame = -1 * (c_frames);
@@ -101,7 +101,7 @@ struct cut_info *cut_info_create(FILE *fp) {
 int cut_add_vad_activity(struct cut_info *cut, int is_active, int is_last) {
     int res;
     if (is_last ||
-        (cut->current_frame - cut->cut_begin_frame == cal_frame_by_time(FILE_CUT_MAX_MS))) {
+        (cut->current_frame - cut->cut_begin_frame == CAL_FRAME_BY_TIME(FILE_CUT_MAX_MS))) {
         cut_frame(cut, cut->current_frame, is_last);
         res = -1 * cut->current_frame;
     } else if (cut->is_pervious_active == is_active) {
