@@ -16,7 +16,7 @@ int main() {
     const char filename[] = "pcm/16k_1.pcm"; // 读取的文件
     const char output_filename_prefix[] = "16k_1.pcm"; // 保存的文件名
     const char output_dir[] = "output_pcm"; // 保存的目录
-    FILE *fp = fopen(filename, "r+b");
+    FILE *fp = fopen(filename, "rb");
     if (fp == NULL) {
         fprintf(stderr, "%s does not exist\n", filename);
         return 3;
@@ -25,7 +25,7 @@ int main() {
     if (vad == NULL) {
         return 4;
     }
-    FILE *fp2 = fopen(filename, "r");
+    FILE *fp2 = fopen(filename, "rb");
     struct cut_info *cut = cut_info_create(fp2);
     snprintf(cut->output_filename_prefix, sizeof(cut->output_filename_prefix), "%s",
              output_filename_prefix);

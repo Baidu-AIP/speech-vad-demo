@@ -12,7 +12,7 @@ static inline int cut_write_file(struct cut_info *cut, int frames) {
     uint16_t buffer[size];
     int readed = fread(buffer, 1, size, cut->fp);
     if (readed > 0) {
-        FILE *res_file = fopen(cut->result_filename, "w+");
+        FILE *res_file = fopen(cut->result_filename, "wb+");
         if (res_file == NULL) {
             fprintf(stderr, "file open failed, %s\n", cut->result_filename);
             return 3;
