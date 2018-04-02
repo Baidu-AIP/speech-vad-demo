@@ -2,7 +2,12 @@
 // Created by fu on 3/6/18.
 //
 
+#ifdef __APPLE__
+#include <sys/malloc.h>
+#else
 #include <malloc.h>
+#endif
+
 #include "common.h"
 #include "period_format.h"
 
