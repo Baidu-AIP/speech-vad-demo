@@ -27,14 +27,14 @@ static int add_period_start(struct periods *per) {
         }
         per->size_allocated *= 2;
     }
-    uint64_t start_time = cal_time_by_frame(per->current_frame);
+    uint64_t start_time = CAL_FRAME_BY_FRAME(per->current_frame);
     per->period_start[per->size - 1] = start_time;
     per->is_end_filled = 0;
     return 0;
 }
 
 static void add_period_end(struct periods *per) {
-    size_t end_time = cal_time_by_frame(per->current_frame);
+    size_t end_time = CAL_FRAME_BY_FRAME(per->current_frame);
     per->period_end[per->size - 1] = end_time;
     per->is_end_filled = 1;
 }

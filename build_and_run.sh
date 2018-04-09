@@ -15,6 +15,7 @@ check_version "cmake" "--version" "2.8"
 sleep 2;
 echo ""
 mkdir -p build && \
+mkdir -p output_pcm && \
 rm -rf  output_pcm/* build/* && \
 cd build && \
 cmake .. && \ 
