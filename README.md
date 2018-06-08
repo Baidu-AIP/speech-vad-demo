@@ -43,14 +43,13 @@ cmake . && make
 
 Windows：
 
-Windows 系统运行 cmake 需要带参数 `-G "MinGW Makefiles"` 否则生成出来是 VS 工程。报错请先检查工程路径是否存在中文字符。
+Windows 安装 cygwin，及cygwin 中 下载cmake make gcc g++等编译软件
 
 ```bat
-build_and_run.bat
+sh build_and_run.sh
 
-rem 或
-
-cmake . -G "MinGW Makefiles" && make
+# 或
+cmake . && make
 ```
 
 ### 结果
