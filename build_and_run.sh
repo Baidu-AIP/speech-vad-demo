@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -uex
 check_version(){
     CMD=$1
     OPT=$2
@@ -18,7 +19,7 @@ mkdir -p build && \
 mkdir -p output_pcm && \
 rm -rf  output_pcm/* build/* && \
 cd build && \
-cmake .. && \ 
+cmake .. && \
 make -j4 && \
 cp vad-demo .. && cd .. && \
 echo "build success wait 3s to run" && \
