@@ -33,14 +33,14 @@
 //  用于period_format.h
 #define PERIODS_SIZE_INITIED 100
 
-#define FRAME_SIZE (160 * MULTI)
+#define FRAME_SIZE (16 * MULTI * 10 )
 
-#define CAL_FRAME_BY_FRAME(frame) (MULTI * frame * 10)
+#define CAL_TIME_BY_FRAME(frame) (MULTI * 10 * frame)
 
 #define CAL_FRAME_BY_TIME(time) (time / (MULTI * 10))
 
-/*
-uint64_t inline CAL_FRAME_BY_FRAME(int frame){
+/*`
+uint64_t inline CAL_TIME_BY_FRAME(int frame){
     return MULTI * frame * 10;
 };
 

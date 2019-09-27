@@ -17,7 +17,7 @@ static inline int cut_write_file(struct cut_info *cut, int frames) {
             fprintf(stderr, "file open failed, %s\n", cut->result_filename);
             return 3;
         }
-        int written = fwrite(buffer, 1, readed, res_file);
+        int written = fwrite(buffer, sizeof(uint16_t), readed, res_file);
         fclose(res_file);
         if (written != readed) {
             fprintf(stderr, "written is %d, readed is %d\n", written, readed);
@@ -42,8 +42,8 @@ static inline int cut_frame(struct cut_info *cut, int last_frame, int force) {
         //printf("cut file at frame: %d\n", last_frame);
         snprintf(cut->result_filename, sizeof(cut->result_filename),
                  "%s/%s_%ld-%ld_%s.pcm", cut->output_file_dir,
-                 cut->output_filename_prefix, CAL_FRAME_BY_FRAME(cut->cut_begin_frame),
-                 CAL_FRAME_BY_FRAME(last_frame) - 1, cut->is_contain_active ? "A" : "I");
+                 cut->output_filename_prefix, CAL_TIME_BY_FRAME(cut->cut_begin_frame),
+                 CAL_TIME_BY_FRAME(last_frame) - 1, cut->is_contain_active ? "A" : "I");
         cut_write_file(cut, frames);
         cut->is_pervious_active = 0;
         cut->is_contain_active = 0;
