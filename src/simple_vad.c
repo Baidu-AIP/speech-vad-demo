@@ -18,7 +18,7 @@ int read_int16_bytes(FILE *fp, int16_t *output) {
     }
 
     size_t readed = fread(output, sizeof(int16_t), FRAME_SIZE, fp);
-    if (readed == 0) {
+    if (readed <= 0) {
         int res = check_end_file(fp);
         return (res == 0) ? 1 : 1000 + res;
     }
