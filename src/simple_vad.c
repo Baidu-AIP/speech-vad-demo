@@ -23,7 +23,7 @@ int read_int16_bytes(FILE *fp, int16_t *output) {
         return (res == 0) ? 1 : 1000 + res;
     }
     if (readed < FRAME_SIZE) {
-        memset(output, 0, (FRAME_SIZE - readed) * sizeof(int16_t));
+        memset(output + readed, 0, (FRAME_SIZE - readed) * sizeof(int16_t));
         // printf("only %ld bits, will refill to %ld\n", readed, length);
     }
     return 0;
